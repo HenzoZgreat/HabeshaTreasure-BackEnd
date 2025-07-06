@@ -50,23 +50,25 @@ public class SecurityConfig {
                     corsConfiguration.setAllowCredentials(true);
                     return corsConfiguration;
                 }))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+//                        .requestMatchers(
+//                                "/api/auth/register",
+//                                "/api/auth/login",
+//                                "/api/auth/validate",
+//                                "/login/oauth2/code/google",
+//                                "/api/auth/verify-email"
+//                        ).permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/api/auth/forgot-password").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/api/auth/reset-password").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/user/products").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/user/products/{id}").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/user/products/{id}/reviews").permitAll()
+//                        .anyRequest().authenticated()
+//                )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers(
-                                "/api/auth/register",
-                                "/api/auth/login",
-                                "/api/auth/validate",
-                                "/login/oauth2/code/google",
-                                "/api/auth/verify-email"
-                        ).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/forgot-password").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/auth/reset-password").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/user/products").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/user/products/{id}").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/user/products/{id}/reviews").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() // <--- THIS LINE
                 )
-
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint) // Add custom entry point
                 )
