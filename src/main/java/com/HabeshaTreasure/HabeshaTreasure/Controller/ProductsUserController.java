@@ -72,14 +72,11 @@ public class ProductsUserController {
         return ResponseEntity.ok("Unfavorited");
     }
 
-
-
     // Reviews
     @GetMapping("/{id}/reviews")
     public ResponseEntity<List<ReviewResponseDTO>> getReviews(@PathVariable Integer id) {
         return ResponseEntity.ok(reviewService.getReviewsForProduct(id));
     }
-
 
     @PostMapping("/{id}/review")
     public ResponseEntity<?> review(@PathVariable Integer id,
@@ -90,8 +87,6 @@ public class ProductsUserController {
         reviewService.addOrUpdateReview(user, id, rating, comment);
         return ResponseEntity.ok("Review submitted");
     }
-
-
 
     @DeleteMapping("/{id}/review")
     public ResponseEntity<?> deleteReview(@PathVariable Integer id, @AuthenticationPrincipal User user) {
